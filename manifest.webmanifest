@@ -6,6 +6,13 @@
   "display": "standalone",
   "background_color": "#f8f1fa",
   "theme_color": "#70518c",
-  "description": "收藏日常的小小幸福，也留存那些想珍藏的话。",
-  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+  "description": "收藏日常的小小幸福，也留存西格的话。",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }
