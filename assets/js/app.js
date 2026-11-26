@@ -19,7 +19,7 @@
       desc: '记录发生了什么，以及当时的感受'
     }
   };
-  var ORDER = ['happy', 'words', 'mood'];
+  var ORDER = ['happy', 'mood', 'words'];
 
   var state = {
     view: 'home', space: 'happy', q: '', month: '', tag: '', mood: '',
@@ -262,8 +262,28 @@
     if (space === 'mood') bindMoodForm(rec);
     else bindNormalForm(space);
     $('overlay').classList.remove('hidden');
+    lockScroll(true);
     var first = $('form').querySelector('input,textarea');
     if (first) setTimeout(function () { first.focus(); }, 60);
+  }
+
+  /* 弹层打开时锁住背景滚动，避免滑弹层时后面的列表跟着动 */
+  function lockScroll(on) {
+    if (on) {
+      state.scrollY = window.scrollY || 0;
+      document.body.style.position = 'fixed';
+      document.body.style.top = (-state.scrollY) + 'px';
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, state.scrollY || 0);
+    }
   }
 
   function closeSheet() {
@@ -271,6 +291,7 @@
     $('form').innerHTML = '';
     state.editing = null;
     state.images = [];
+    lockScroll(false);
   }
 
   function normalFormHTML(space, rec) {
